@@ -12,7 +12,7 @@ D.  This app streamlines the attendance taking process and provides an easy way 
      become tedious and sometimes difficult to use. Our Attendance System allows for easy data input and storage through a simple and effective user interface, making taking 
      attendance easy and carefree.
      
-E.  We plan to develop the app inside Visual Studio Code using the C++ language.
+E.  We plan to develop the app inside Visual Studios using the C++ language.
 
 F.  The input of our project is the raw attendance/infraction data from the user. 
     The output of our project is the organization and storage of the inputted data inside a local database, which the user can access through an interface.
