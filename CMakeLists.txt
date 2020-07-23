@@ -10,6 +10,8 @@ ADD_EXECUTABLE(test
 
 ADD_EXECUTABLE(application
     main.cpp
+    Employee.cpp
+    Date.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
