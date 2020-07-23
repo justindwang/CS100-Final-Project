@@ -16,3 +16,8 @@ E.  We plan to develop the app inside Visual Studios using the C++ language.
 
 F.  The input of our project is the raw attendance/infraction data from the user. 
     The output of our project is the organization and storage of the inputted data inside a local database, which the user can access through an interface.
+
+
+How to Run Attendance Manager v.0.0.1
+
+<a href="https://github.com/bernieshan/CS100-Final-Project/archive/master.zip">Click here to download the application</a>
