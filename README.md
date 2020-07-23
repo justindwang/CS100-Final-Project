@@ -20,7 +20,7 @@ F.  The input of our project is the raw attendance/infraction data from the user
 
 ## How to Run Attendance Manager v.0.0.1 ##
 
-<a href="https://github.com/bernieshan/CS100-Final-Project/archive/master.zip">Click here to download the application files</a> then run cmake and make on your computer to produce the application.exe file. From there, you can run Attendance Manager and begin tracking attendance and Attendance infractions. 
+First make sure you are either on Linux OS, or have the CMake compatability for terminal. <a href="https://github.com/bernieshan/CS100-Final-Project/archive/master.zip">Click here to download the application files</a> then run the "cmake" and "make" commands in your computer terminal to generate the "application.exe" file. From there, you can run Attendance Manager and begin tracking attendance and Attendance infractions. 
 
 
 ### Project Report ###
