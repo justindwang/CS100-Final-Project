@@ -56,7 +56,7 @@ void Employee::addPoint(string receivedMonth, string receivedDate, string receiv
 	if(amount == 1)
             points.push_back({receivedMonth, receivedDate, receivedYear, amount, "T (Tardy up to 15 minutes)", admin});
 	if(amount == 2)
-	    points.push_back({receivedMonth, receivedDate, receivedYear, amount, "L (Late 15 minutes+)", admin});
+	    points.push_back({receivedMonth, receivedDate, receivedYear, amount, "L (Late 15+ minutes)", admin});
 	if(amount == 3)
 	    points.push_back({receivedMonth, receivedDate, receivedYear, amount, "A (Absent/No Show)", admin});
 }

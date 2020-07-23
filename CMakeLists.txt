@@ -6,6 +6,9 @@ SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(test
     unit_test.cpp
+    Employee.cpp
+    Date.cpp
+    Visitor.cpp
 )
 
 ADD_EXECUTABLE(application
