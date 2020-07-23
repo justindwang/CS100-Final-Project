@@ -18,6 +18,13 @@ F.  The input of our project is the raw attendance/infraction data from the user
     The output of our project is the organization and storage of the inputted data inside a local database, which the user can access through an interface.
 
 
-How to Run Attendance Manager v.0.0.1
+## How to Run Attendance Manager v.0.0.1 ##
 
-<a href="https://github.com/bernieshan/CS100-Final-Project/archive/master.zip">Click here to download the application</a>
+<a href="https://github.com/bernieshan/CS100-Final-Project/archive/master.zip">Click here to download the application files</a> then run cmake and make on your computer to produce the application.exe file. From there, you can run Attendance Manager and begin tracking attendance and Attendance infractions. 
+
+
+### Project Report ###
+
+This project is implemented using the Factory, Decorator, and Visitor Design Patterns. The application opens with a menu that has seven options, shown below.
+
+![image of menu](https://imgur.com/a/8VTs2v7)
