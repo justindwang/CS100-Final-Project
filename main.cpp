@@ -261,7 +261,7 @@ void addPoints(vector<Employee>& Employees) {
                     cout << "Please choose a reason for giving points: " << endl;
                     cout << "1 - T (Tardy up to 15 minutes)" << endl;
                     cout << "2 - L (Late 15+ minutes)" << endl;
-                    cout << "3 - A (Absent/No Show" << endl;
+                    cout << "3 - A (Absent/No Show)" << endl;
                     cout << "Enter selection: ";
                     cin >> choice;
 
