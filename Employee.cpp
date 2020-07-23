@@ -1,4 +1,5 @@
 #include "Employee.h"
+#include "Visitor.h"
 
 void Point::printPoint() {
     cout << receivedMonth << " " << receivedDate << ", "
@@ -6,15 +7,16 @@ void Point::printPoint() {
         << reason << " - Given by: " << admin << endl;
 }
 
+Employee::Employee(){
+    firstname = "";
+    lastname = "";
+    charlesNumber = "";
+
+}
 Employee::Employee(string fname, string lname, string cNumber) {
     firstname = fname;
     lastname = lname;
     charlesNumber = cNumber;
-}
-
-const void Employee::printEmployee() {
-    cout << firstname << " " << lastname << " " << charlesNumber << " - "
-        << getTotalPoints() << " points total in last 75 days." << endl;
 }
 
 // make it so it only counts last 75 days
@@ -48,9 +50,15 @@ string Employee::getCharlesNumber() {
     return charlesNumber;
 }
 
+//factory design pattern
 void Employee::addPoint(string receivedMonth, string receivedDate, string receivedYear, int amount
-    , string reason, string admin) {
-        points.push_back({receivedMonth, receivedDate, receivedYear, amount, reason, admin});
+    , string admin) {
+	if(amount == 1)
+            points.push_back({receivedMonth, receivedDate, receivedYear, amount, "T (Tardy up to 15 minutes)", admin});
+	if(amount == 2)
+	    points.push_back({receivedMonth, receivedDate, receivedYear, amount, "L (Late 15 minutes+)", admin});
+	if(amount == 3)
+	    points.push_back({receivedMonth, receivedDate, receivedYear, amount, "A (Absent/No Show)", admin});
 }
 
 string Employee::getName() {
@@ -61,6 +69,19 @@ const void Employee::printAllPoints() {
     for (unsigned i = 0; i < points.size(); ++i) {
         points.at(i).printPoint();
     }
+}
+
+//Part of the visitor design pattern
+void Employee::accept(PrintVisitor* pv){
+    pv->visit(this);
+}
+
+string Employee::getFirstName(){
+    return firstname;
+}
+
+string Employee::getLastName(){
+    return lastname;
 }
 
 bool Point::operator<(Point & rhs) {

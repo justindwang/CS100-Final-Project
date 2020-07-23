@@ -2,6 +2,8 @@
 #include <vector>
 #include "Employee.h"
 #include "Date.h"
+#include "Decorator.hpp"
+#include "Visitor.h"
 #include <thread>
 #include <chrono>
 #include <algorithm>
@@ -48,7 +50,7 @@ vector<Employee> initilizeProgram() {
             iss >> month >> date >> year >> amount;
             getline(fin, reason);
             getline(fin, supervisor);
-            Employees.at(count - 1).addPoint(month, date, year, amount, reason, supervisor);
+            Employees.at(count - 1).addPoint(month, date, year, amount, supervisor);
         }
     }
     fin.close();
@@ -257,19 +259,15 @@ void addPoints(vector<Employee>& Employees) {
                 char choice;
                 while (flag2) {
                     cout << "Please choose a reason for giving points: " << endl;
-                    cout << "1 - L (Late up to 15 minutes)" << endl;
-                    cout << "2 - LL (Late 15+ minutes)" << endl;
-                    cout << "3 - C (Called Out Following Proper Procedure)" << endl;
-                    cout << "4 - M (Missed Training/Meeting/Appointment)" << endl;
-                    cout << "5 - IP (Called Out Improper Procedure)" << endl;
-                    cout << "6 - N (No Call/No Show)" << endl;
-                    cout << "7 - CL (Continued Illness)" << endl;
+                    cout << "1 - T (Tardy up to 15 minutes)" << endl;
+                    cout << "2 - L (Late 15+ minutes)" << endl;
+                    cout << "3 - A (Absent/No Show" << endl;
                     cout << "Enter selection: ";
                     cin >> choice;
 
                     switch(choice) {
                         case '1':
-                            Employees.at(i).addPoint(month, date, year, 1, "L (Late up to 15 minutes)", supervisor);
+                            Employees.at(i).addPoint(month, date, year, 1, supervisor);
                             flag = false;
                             flag2 = false;
                             cout << endl;
@@ -280,7 +278,7 @@ void addPoints(vector<Employee>& Employees) {
                                 << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
                             break;
                         case '2':
-                            Employees.at(i).addPoint(month, date, year, 2, "LL (Late 15+ minutes)", supervisor);
+                            Employees.at(i).addPoint(month, date, year, 2, supervisor);
                             flag = false;
                             flag2 = false;
                             cout << endl;
@@ -291,57 +289,13 @@ void addPoints(vector<Employee>& Employees) {
                                 << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
                             break;
                         case '3':
-                            Employees.at(i).addPoint(month, date, year, 3, "C (Called Out Following Proper Procedure)", supervisor);
+                            Employees.at(i).addPoint(month, date, year, 3, supervisor);
                             flag = false;
                             flag2 = false;
                             cout << endl;
                             cout << "---------------------------------------------------------" << endl;
                             cout << endl;
                             cout << "3 Points added to " << Employees.at(i).getName() << endl;
-                            cout << Employees.at(i).getName() << " has a total of " << Employees.at(i).getTotalPoints() 
-                                << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
-                            break;
-                        case '4':
-                            Employees.at(i).addPoint(month, date, year, 3, "M (Missed Training/Meeting/Appointment)", supervisor);
-                            flag = false;
-                            flag2 = false;
-                            cout << endl;
-                            cout << "---------------------------------------------------------" << endl;
-                            cout << endl;
-                            cout << "3 Points added to " << Employees.at(i).getName() << endl;
-                            cout << Employees.at(i).getName() << " has a total of " << Employees.at(i).getTotalPoints() 
-                                << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
-                            break;
-                        case '5':
-                            Employees.at(i).addPoint(month, date, year, 4, "IP (Called Out Improper Procedure)", supervisor);
-                            flag = false;
-                            flag2 = false;
-                            cout << endl;
-                            cout << "---------------------------------------------------------" << endl;
-                            cout << endl;
-                            cout << "4 Points added to " << Employees.at(i).getName() << endl;
-                            cout << Employees.at(i).getName() << " has a total of " << Employees.at(i).getTotalPoints() 
-                                << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
-                            break;
-                        case '6':
-                            Employees.at(i).addPoint(month, date, year, 6, "N (No Call/No Show)", supervisor);
-                            flag = false;
-                            flag2 = false;
-                            cout << endl;
-                            cout << "---------------------------------------------------------" << endl;
-                            cout << endl;
-                            cout << "6 Points added to " << Employees.at(i).getName() << endl;
-                            cout << Employees.at(i).getName() << " has a total of " << Employees.at(i).getTotalPoints() 
-                                << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
-                            break;
-                        case '7':
-                            Employees.at(i).addPoint(month, date, year, 0, "CL (Continued Illness)", supervisor);
-                            flag = false;
-                            flag2 = false;
-                            cout << endl;
-                            cout << "---------------------------------------------------------" << endl;
-                            cout << endl;
-                            cout << "0 Points added to " << Employees.at(i).getName() << endl;
                             cout << Employees.at(i).getName() << " has a total of " << Employees.at(i).getTotalPoints() 
                                 << " points (ONLY INCLUDES POINTS FROM LAST 75 DAYS)." << endl;
                             break;
@@ -435,8 +389,10 @@ const void outputEmployees(vector<Employee>& Employees) {
     cout << "---------------------------------------------------------" << endl;
     cout << endl;
     cout << "List of all Employees sorted by points (ONLY INCLUDES POINTS RECEIVED IN LAST 75 DAYS): " << endl;
+    PrintVisitor pv;
+    
     for (unsigned i = 0; i < Employees.size(); ++i) {
-        Employees.at(i).printEmployee();
+        Employees.at(i).accept(&pv);
     }
     cout << endl;
     cout << "---------------------------------------------------------" << endl;
@@ -457,7 +413,7 @@ const void outputEmployee(vector<Employee>& Employees) {
     }
     cout << "View Employee detailed point information (Type CANCEL to cancel at any time): " << endl;
     string charlesNumber;
-    bool flag;
+    bool flag = true;
     while (flag) {
         cout << "Enter Employee's ID Number: ";
         cin >> charlesNumber;
@@ -474,7 +430,8 @@ const void outputEmployee(vector<Employee>& Employees) {
                 cout << endl;
                 cout << "---------------------------------------------------------" << endl;
                 cout << endl;
-                Employees.at(i).printEmployee();
+		PrintVisitor pv;
+                Employees.at(i).accept(&pv);
                 cout << endl << "Points History (Includes All Points)" << endl;
                 if (Employees.at(i).points.empty()) {
                     cout << endl << "Employee has NO points in the system!" << endl;
@@ -511,6 +468,10 @@ const void saveProgram(vector<Employee>& Employees) {
     for (unsigned i = 0; i < Employees.size(); ++i) {
         fout << "Employee " << Employees.at(i).getName() << " " 
             << Employees.at(i).getCharlesNumber() << endl;
+	if(Employees.at(i).points.size() == 0) {
+	    GoodEmployee ge = GoodEmployee(Employees.at(i));
+	    fout << ge.displayGoodEmployeeMsg(); 
+	}
         for (unsigned j = 0; j < Employees.at(i).points.size(); ++j) {
             fout << "POINT " << Employees.at(i).points.at(j).receivedMonth <<
             " " << Employees.at(i).points.at(j).receivedDate << " " <<
@@ -521,9 +482,6 @@ const void saveProgram(vector<Employee>& Employees) {
     }
 
     cout << "Successfully saved program to data file." << endl;
-
-    cout << "Press ENTER to close program" << endl;
-    cout << endl;
     cout << "---------------------------------------------------------" << endl;
     cout << endl;
 }
