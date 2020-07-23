@@ -27,4 +27,5 @@ F.  The input of our project is the raw attendance/infraction data from the user
 
 This project is implemented using the Factory, Decorator, and Visitor Design Patterns. The application opens with a menu that has seven options, shown below.
 
-![image of menu](https://imgur.com/a/8VTs2v7)
+<img width="274" alt="ss1" src="https://user-images.githubusercontent.com/67339503/88302091-47def980-ccba-11ea-8f1b-54ddcbec73be.PNG">
+
