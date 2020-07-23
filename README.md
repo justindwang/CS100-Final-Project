@@ -38,6 +38,8 @@ The Visitor Pattern prints the attendance data of each Employee in an organized 
 ## Class Diagrams ##
 
 Below are the class diagrams of the different design patterns used. 
+
+
 ![SS6](https://user-images.githubusercontent.com/67339503/88331329-a5d30780-cce1-11ea-9a68-c8d04853b108.png)
 ![SS7](https://user-images.githubusercontent.com/67339503/88331334-a7043480-cce1-11ea-9950-ed4979923bac.png)
 ![SS8](https://user-images.githubusercontent.com/67339503/88331338-a8cdf800-cce1-11ea-94bf-36e9c7dc2260.png)
